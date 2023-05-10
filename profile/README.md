@@ -48,7 +48,7 @@ A browser extension would require the user to install yet another extension -- o
 
 WalletConnect is a lot more complicated to set up for developers. It also uses websockets, which tend to be more fragile. It also takes some time to set up a persistent connection, while MobileConnect instantly generates a QR code.
 
-With MobileConnect, we have a relatively simple setup for developers, a great UX (users can use it right out of the box without installing anything). This is mostly achieved by leveraging already existing technologies -- especially Solana Pay.
+**With MobileConnect, we have a relatively simple setup for developers, a great UX (users can use it right out of the box without installing anything). This is mostly achieved by leveraging already existing technologies -- especially Solana Pay.**
 
 ## How to add it to my dApp?
 
@@ -69,10 +69,10 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 }
 ```
 
-If you have set up a private server, you must also pass its URL like this: `new MobileConnectWalletAdapter("your-server.com")`
+If you use a private server, you must also pass its URL: `new MobileConnectWalletAdapter("your-server.com")`
 
 ## Links
 
-[Project's website](https://solana-mobileconnect)
+[Project's website](https://solana-mobileconnect.com)
 
-[NFT Demo](https://solana-mobileconnect/nft-demo)
+[NFT Demo](https://solana-mobileconnect.com/nft-demo)
