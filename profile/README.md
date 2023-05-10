@@ -2,15 +2,15 @@
 
 ## What is the goal?
 
-Users should always have the option to use their mobile wallet -- no matter where their dApp is running.
+**Users should always have the option to use their mobile wallet -- no matter where their dApp is running.**
 
-For example, it should be possible to run a dApp on a desktop computer (even one that isn't yours) and still be able to safely interact with it.
+For example, it should be possible to **run a dApp on a desktop computer** (even one that isn't yours) and still be able to safely interact with it.
 
-For the user, this means that they can store their keys safely in their mobile wallet. It is more convenient since it e.g. allows you to manage a dApp on a larger monitor.
+For the user, this means that they can store their keys **safely** in their mobile wallet. It is also more **convenient** since it e.g. allows you to manage a dApp on a larger monitor.
 
 ## How does it work?
 
-The core component of Solana MobileConnect is a session server that manages login and transaction sessions. It does most of the heavy lifting.
+The core component of Solana MobileConnect is a **session server** that manages login and transaction sessions. It does most of the heavy lifting.
 
 Here's the flow of a transaction initiated by the user:
 
@@ -30,9 +30,9 @@ After a while, the transaction will have reached the `confirmed` state. This wil
 
 ### Logging in
 
-To log in, a new login session is created on the server. Each login session is associated with a unique link. This link is encoded in a QR code. When the user scans it, their public key is sent to the server, allowing us to capture it.
+To log in, a new login session is created on the server. Each login session is associated with a unique link. This link is encoded in a QR code. When the user scans it, their public key is sent to the server (as part of Solana Pay's Transaction Request), allowing us to capture it.
 
-In this case, the server sends back a dummy transaction, but ignores it afterwards -- since we're only interested in the public key.
+In this case, the server sends back a dummy transaction and ignores it afterwards -- since we're only interested in the public key.
 
 The frontend polls the server about the login session and eventually receives the public key. This is when the user is logged in.
 
@@ -42,11 +42,11 @@ The role of the wallet adapter is to be an intermediary between frontend and ses
 
 ## Why this solution?
 
-A browser extension would require the user to install yet another extension. It's not an ideal user experience.
+A browser extension would require the user to install yet another extension -- on every device and for a single use case. It's not an ideal user experience.
 
-WalletConnect is a lot more complicated, thus harder to set up. It also uses websockets, which tend to be more fragile.
+WalletConnect is a lot more complicated to set up for developers. It also uses websockets, which tend to be more fragile. It also takes some time to set up a persistent connection, while MobileConnect instantly generates a QR code.
 
-Here, we have a relatively simple setup for developers, a great UX (they can use it right out of the box). This is achieved by leveraging existing technologies (especially Solana Pay).
+With MobileConnect, we have a relatively simple setup for developers, a great UX (users can use it right out of the box without installing anything). This is mostly achieved by leveraging already existing technologies -- especially Solana Pay.
 
 ## How to add it to my dApp?
 
