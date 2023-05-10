@@ -1,22 +1,32 @@
 # Solana MobileConnect
 
-The goal of this project is to allow users to always use their mobile wallet -- no matter where the target dApp is running.
+## What is the goal?
 
-The key difference to Solana Pay is that you can log into an app before making a transaction. This means that the app knows who you are and can show you a personalized interface.
+Users should have the option to use their mobile wallet -- no matter where the dApp is running that they want to interact with.
+
+In particular, it should be possible to run a dApp on a desktop computer (even one that isn't yours) and still be able to safely interact with it.
 
 ## How does it work?
 
-Here's the flow for a transaction initiated by the user:
+The key component is a session server that runs in the background and manages login and transaction servers. It does the heavy lifting.
+
+Here's the flow of a transaction initiated by the user:
 
 ![Transaction flow](/img/flow.svg)
 
-To send a transaction, the dApp passes it to MobileConnect's wallet adapter. It serializes it and sends it to a server to be stored there. It also returns a link to be encoded in the QR code. When the user scans it, the 
+Step 1: The frontend serializes the transaction and sends it to the server to create a new transaction session. The transaction is now accessible via the unique ID of the session (using Solana Pay's Transaction Requests). On the frontend, this unique link is encoded in a QR code and displayed to the user. Once the user scans it, they will receive the transaction. They sign it and it is broadcast.
 
-It builds on Solana Pay's Transaction Requests.
+Step 2: The frontend polls the state of the transaction session, which induces the server to check the state of the blockchain.
 
-To log in, a new login session is created on a server and the user's request is directed there. This way, we can get their public key.
+Step 3: At a certain point, the transaction will be confirmed. This is reflected in the transaction session. The frontend now has the tx signature and can notify the user accordingly.
 
-The login process works similarly. Only that in this case, the server sends a dummy transaction to the phone, which is ignored afterwards. Only the user's public key is relevant in this case. It is stored on the server until it's retrieved by the frontend through polling. This is when the user logs in.
+### Logging in
+
+To log in, a new login session is created on a server. Each login session is associated with a unique link. This link is encoded in a QR code. When the user scans it, their public key is sent to the server, allowing us to capture it.
+
+In this case, the server sends back a dummy transaction, but ignores it afterwards -- since we're only interested in the public key.
+
+The frontend polls the server about the login session and eventually receives the public key. This is when the user is logged in.
 
 ## Why this solution?
 
