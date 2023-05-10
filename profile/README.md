@@ -52,13 +52,9 @@ With MobileConnect, we have a relatively simple setup for developers, a great UX
 
 ## How to add it to my dApp?
 
-You first have to decide which session server you want to use.
+You first have to decide which session server you want to use.  If a public server is sufficient for your use case (e.g. for testing), you can skip this step. If you want to set up your own server, you can clone [this repository]() and set it up accordingly.
 
-In case a public server is sufficient (e.g. for testing), you are done.
-
-If you want to set up your own server, you can use [this repository]().
-
-In the second step, you integrate MobileConnect's wallet adapter into your dApp.
+Now, you need to integrate MobileConnect's wallet adapter into your dApp.
 
 Run `npm install solana-mobileconnect-wallet-adapter` to install the package.
 
@@ -67,15 +63,16 @@ You include it like any other wallet adapter:
 import { MobileConnectWalletAdapter } from 'solana-mobileconnect-wallet-adapter'
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-
     const wallets = [
       new MobileConnectWalletAdapter(),
     ]
 }
 ```
 
-If you have set up a private server, you must pass its URL like this: `new MobileConnectWalletAdapter(your-server.com)`
+If you have set up a private server, you must also pass its URL like this: `new MobileConnectWalletAdapter("your-server.com")`
 
 ## Links
 
-[The project's website](https://solana-mobileconnect).
+[Project's website](https://solana-mobileconnect)
+
+[NFT Demo](https://solana-mobileconnect/nft-demo)
