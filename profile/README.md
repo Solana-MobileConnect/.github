@@ -6,6 +6,12 @@ For example, it should be possible to run a dApp on a desktop computer (even one
 
 For the user, this means that they can store their keys **safely** in their mobile wallet. It is also more **convenient** since it e.g. allows you to manage a dApp on a larger monitor.
 
+[Watch video](https://solana-mobileconnect.com/#demo)
+
+[NFT Demo](https://solana-mobileconnect.com/nft-demo)
+
+[Project's website](https://solana-mobileconnect.com)
+
 ## How does it work?
 
 The core component of Solana MobileConnect is a **session server** that manages login and transaction sessions. It does most of the heavy lifting.
@@ -70,9 +76,3 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 ```
 
 If you use a private server, you must also pass its URL: `new MobileConnectWalletAdapter("your-server.com")`
-
-## Links
-
-[Project's website](https://solana-mobileconnect.com)
-
-[NFT Demo](https://solana-mobileconnect.com/nft-demo)
