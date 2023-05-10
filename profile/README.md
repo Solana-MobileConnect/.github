@@ -8,4 +8,4 @@ How to add it to my dApp?
 
 Here's the flow for a transaction by the user:
 
-![Transaction flow](./flow.svg)
+![Transaction flow](/img/flow.svg)
