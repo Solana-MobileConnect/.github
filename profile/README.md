@@ -4,7 +4,7 @@
 
 **Users should always have the option to use their mobile wallet -- no matter where their dApp is running.**
 
-For example, it should be possible to **run a dApp on a desktop computer** (even one that isn't yours) and still be able to safely interact with it.
+For example, it should be possible to run a dApp on a desktop computer (even one that isn't yours) and still be able to safely interact with it.
 
 For the user, this means that they can store their keys **safely** in their mobile wallet. It is also more **convenient** since it e.g. allows you to manage a dApp on a larger monitor.
 
@@ -18,7 +18,7 @@ Here's the flow of a transaction initiated by the user:
 
 ### Step 1
 
-The frontend serializes the transaction and sends it to the server to create a new transaction session. The transaction is now accessible via the unique ID of the session (using Solana Pay's Transaction Requests). On the frontend, this unique link is encoded in a QR code and displayed to the user. Once the user scans it, they will receive the transaction. They sign it and it is broadcast.
+The frontend serializes the transaction and sends it to the server to create a new transaction session. The transaction is now accessible via the unique ID of the session. On the frontend, this unique link is encoded in a QR code and displayed to the user. Once the user scans it, they will receive the transaction (using Solana Pay's Transaction Requests). They sign it and it is broadcast to the network.
 
 ### Step 2
 
@@ -26,15 +26,19 @@ The frontend polls the state of the transaction session, which prompts the serve
 
 ### Step 3
 
-After a while, the transaction will have reached the `confirmed` state. This will be reflected in the state of the transaction session. The frontend can now notify the user.
+After a while, the transaction will have reached the `confirmed` state. This will be reflected in the state of the transaction session returned by the server. The frontend can now notify the user.
 
 ### Logging in
 
-To log in, a new login session is created on the server. Each login session is associated with a unique link. This link is encoded in a QR code. When the user scans it, their public key is sent to the server (as part of Solana Pay's Transaction Request), allowing us to capture it.
+To log in, the frontend creates a new login session on the server.
 
-In this case, the server sends back a dummy transaction and ignores it afterwards -- since we're only interested in the public key.
+Each login session is associated with a unique link, which is encoded in a QR code.
 
-The frontend polls the server about the login session and eventually receives the public key. This is when the user is logged in.
+When the user scans it, their public key is sent to the server (according to Solana Pay's Transaction Requests), allowing the server to capture and associate it with the login session.
+
+Meanwhile, the frontend polls the server for the login session and eventually receives the public key. This is when the user is logged in.
+
+Note that, when the user scans the QR code, the server sends back a dummy transaction and ignores it afterwards -- since we're only interested in the public key.
 
 ### Wallet adapter
 
