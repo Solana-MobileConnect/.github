@@ -32,7 +32,7 @@ The frontend polls the state of the transaction session, which prompts the serve
 
 After a while, the transaction will have reached the `confirmed` state. This will be reflected in the state of the transaction session returned by the server. The frontend can now notify the user.
 
-### Logging in
+## Logging in
 
 To log in, the frontend creates a new login session on the server.
 
@@ -44,7 +44,7 @@ Meanwhile, the frontend polls the server for the login session and eventually re
 
 Note that, when the user scans the QR code, the server sends back a dummy transaction and ignores it afterwards -- since we're only interested in the public key.
 
-### Wallet adapter
+## Wallet adapter
 
 The role of the wallet adapter is to be an intermediary between frontend and session server. For example, when the frontend code makes a `sendTransaction` request, the wallet adapter creates a new transaction session on the server, displays the QR code to the user and handles the polling.
 
@@ -79,7 +79,9 @@ If you use a private server, you must also pass its URL: `new MobileConnectWalle
 
 ## Limitations
 
-**Uniqueness of Transactions**: In the current implementation, the user must ensure that the instruction set of transactions is unique. This has to do with how the server tracks transactions on the blockchain. Example: a simple transfer app allows the user to send SOL to an arbitrary recipient. In this case, it may be that they send the same amount twice to the same user (i.e. two transactions with the same instruction set). In this case, the developer can ensure uniqueness by adding a memo instruction with random data.
+**Uniqueness of Transactions**: In the current implementation, the developer must ensure that the instruction set of transactions is unique. This has to do with how the server tracks transactions on the blockchain.
+
+Example: a simple transfer app that allows the user to send SOL to an arbitrary recipient. In this case, it may be that they send the same amount twice to the same user (these are two transactions with the same instruction set). In this case, the developer needs to ensure uniqueness. This can be done by adding a memo instruction with random data to the transaction.
 
 **Security of Login**: In the current implementation, users are logged in by simply sending their public key to an endpoint. In principle, anyone could log in with any public key. Until message signing is implemented, the authenticity of a user cannot be guaranteed. Please don't show sensitive data based on the active wallet.
 
