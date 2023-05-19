@@ -81,7 +81,7 @@ If you use a private server, you must also pass its URL: `new MobileConnectWalle
 
 **Uniqueness of Transactions**: In the current implementation, the developer must ensure that the instruction set of transactions is unique. This has to do with how the server tracks transactions on the blockchain.
 
-Example: a simple transfer app that allows the user to send SOL to an arbitrary recipient. In this case, it may be that they send the same amount twice to the same user (these are two transactions with the same instruction set). In this case, the developer needs to ensure uniqueness. This can be done by adding a memo instruction with random data to the transaction.
+Example: a simple transfer app that allows the user to send SOL to an arbitrary recipient. It may be that a user sends the same amount twice to the same recipient (this results in two transactions with the same instruction set). For this app to work with MobileConnect, the developer needs to ensure uniqueness of transactions. A common way to achieve that is by adding a memo instruction with random data.
 
 **Security of Login**: In the current implementation, users are logged in by simply sending their public key to an endpoint. In principle, anyone could log in with any public key. Until message signing is implemented, the authenticity of a user cannot be guaranteed. Please don't show sensitive data based on the active wallet.
 
