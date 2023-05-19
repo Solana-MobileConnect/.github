@@ -76,3 +76,11 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 ```
 
 If you use a private server, you must also pass its URL: `new MobileConnectWalletAdapter("your-server.com")`
+
+## Limitations
+
+**Uniqueness of Transactions**: In the current implementation, the user must ensure that the instruction set of transactions is unique. This has to do with how the server tracks transactions on the blockchain. Example: a simple transfer app allows the user to send SOL to an arbitrary recipient. In this case, it may be that they send the same amount twice to the same user (i.e. two transactions with the same instruction set). In this case, the developer can ensure uniqueness by adding a memo instruction with random data.
+
+**Security of Login**: In the current implementation, users are logged in by simply sending their public key to an endpoint. In principle, anyone could log in with any public key. Until message signing is implemented, the authenticity of a user cannot be guaranteed. Please don't show sensitive data based on the active wallet.
+
+**Only base function are implemented**: The wallet adapter allows a user to `connect` and `sendTransaction` remotely. However, `signTransaction`, `signAllTransactions` and `signMessage` are not supported because of technical limitations.
