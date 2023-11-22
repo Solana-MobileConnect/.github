@@ -1,6 +1,6 @@
 # Solana MobileConnect
 
-## The goal: Users should always have the option to use their mobile wallet -- no matter where their dApp is running
+**The goal: Users should always have the option to use their mobile wallet -- no matter where their dApp is running.**
 
 For example, it should be possible to run a dApp on a desktop computer (even one that isn't yours) and still be able to safely interact with it.
 
